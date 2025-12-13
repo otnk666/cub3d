@@ -1,4 +1,4 @@
-#include "parse.h"
+#include "cub3d.h"
 
 int check_filename(char* filename)
 {
@@ -16,30 +16,48 @@ int check_filename(char* filename)
     return(1);
 }
 
-int check_path(int fd)
+void init_game(t_game *game)
 {
-    char *line;
-    char **split_line;
-    int count;
-
-    while(1)
-    {
-        line = get_next_line(fd);
-        split_line = ft_split(line,' ');
-        if(split_line[0] != "NO" || split_line[0] != "SO"
-        || split_line[0] != "WE" || split_line[0] != "EA"
-        || split_line[0] != "F")
-            return(0); //error;
-
-
+    game->mlx = NULL;
+    game->win = NULL;
+    game->img = NULL;
+    game->tex.no = NULL;
+    game->tex.so = NULL;
+    game->tex.we = NULL;
+    game->tex.ea = NULL;
+    game->floor.r = -1;
+    game->floor.g = -1;
+    game->floor.b = -1;
+    game->ceiling.r = -1;
+    game->ceiling.g = -1;
+    game->ceiling.b = -1;
+    game->map.grid = NULL;
+    game->map.width = -1;
+    game->map.height = -1;
 }
 
 int main (int argc, char* argv[])
 {
+    t_game game;
+
     if (argc != 2)
-        return(1);
+        perror_and_exit("Error: usage: ./cub3d file.cub3d", NULL);
     
     if (!check_filename(argv[1]))
-        return(1);
+         perror_and_exit("Error: usage: ./cub3d file.cub3d", NULL);
     
+    init_game(&game);
+    parse(argv[1],&game);
+
+    printf("%s\n", game.tex.no);
+    printf("%s\n", game.tex.so);
+    printf("%s\n", game.tex.we);
+    printf("%s\n", game.tex.ea);
+    printf("%d,%d,%d\n", game.floor.r, game.floor.g, game.floor.b);
+    printf("%d,%d,%d\n", game.ceiling.r, game.ceiling.g, game.ceiling.b);
+    int i = 0; 
+    while(i < game.map.height)
+    {
+        printf("%s", game.map.grid[i++]);
+    }
 }
