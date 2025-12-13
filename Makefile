@@ -10,14 +10,16 @@ INC_DIR = ./includes
 LIB_DIR = ./libft
 LIB = $(LIB_DIR)/libft.a
 
-SRCS = $(addprefix $(SRCS_DIR)/, \
-		main.c \
-		parse/parse.c \
-		parse/parse_texture.c \
-		parse/parse_color.c \
-		parse/parse_map.c \
-		utils/error.c \
-		) \
+# SRCS = $(addprefix $(SRCS_DIR)/, \
+# 		main.c \
+# 		parse/parse.c \
+# 		parse/parse_texture.c \
+# 		parse/parse_color.c \
+# 		parse/parse_map.c \
+# 		utils/error.c \
+# 		) \
+
+SRCS = $(shell find $(SRCS_DIR) -name "*.c")
 
 OBJS = $(SRCS:.c=.o)
 
@@ -27,7 +29,7 @@ UNAME := $(shell uname)
 
 ifeq ($(UNAME), Darwin)
     # macOS
-    MLX_DIR = minilibx_mms_20200219
+    MLX_DIR = minilibx_opengl_20191021
     MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 else
     # Linux
