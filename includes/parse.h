@@ -1,27 +1,12 @@
 #ifndef PARSE_H
 # define PARSE_H
 
-# include "ft_printf.h"
-# include "get_next_line.h"
-# include "libft.h"
-# include "mlx.h"
+//parse_map.c
+int parse_map(int fd, t_game *game);
 
-#include <fcntl.h>
+//parse_utili.c
+int is_empty_line(char *line);
 
-typedef s_map
-{
-    char *path_no;
-    char *path_so;
-    char *path_we;
-    char *path_ea;
-
-    int floor_color[3];
-}   t_map;
-
-typedef s_var
-{
-    
-}
 
 
 #endif
