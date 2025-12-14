@@ -1,6 +1,6 @@
 NAME = cub3D
 CC = cc
-CFLAGS = -Wextra -Wall -Werror
+CFLAGS = -Wextra -Wall -Werror 
 
 RM = rm -rf
 
@@ -50,12 +50,12 @@ $(LIB):
 
 %.o: %.c
 		$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-		
+
 clean:
 		$(RM) $(OBJS)
 		$(MAKE) -C $(MLX_DIR) clean
 		$(MAKE) -C $(LIB_DIR) clean
-		
+
 fclean: clean
 		$(RM) $(NAME)
 		$(MAKE) -C $(LIB_DIR) fclean
