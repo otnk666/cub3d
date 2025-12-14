@@ -30,6 +30,15 @@ typedef struct s_map
     int height;
 }   t_map;
 
+typedef struct s_player
+{
+    double x;
+    double y;
+    double dir_x;
+    double dir_y;
+    char direction;
+}   t_player;
+
 typedef struct s_game
 {
     void *mlx;
@@ -40,8 +49,11 @@ typedef struct s_game
     t_color floor;
     t_color ceiling;
     t_map map;
-
+    t_player player;
 } t_game;
+
+//check
+int check_filename(char* filename);
 
 //free
 void free_split(char** split);
@@ -50,7 +62,7 @@ void free_all(t_game *game);
 //error
 void perror_and_exit(char *msg, t_game *game);
 
-
+//parse
 void parse(char *filename, t_game *game);
 
 #endif

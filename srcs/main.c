@@ -1,26 +1,7 @@
 #include "cub3d.h"
 
-int check_filename(char* filename)
+void init_parse(t_game *game)
 {
-    char* extention;
-    int diff;
-
-    if (!filename)
-        return (0);
-    extention = ft_strchr(filename, '.');
-    if (!extention)
-        return (0);
-    diff = ft_strncmp(extention, ".cub", 4);
-    if(diff)
-        return (0);
-    return(1);
-}
-
-void init_game(t_game *game)
-{
-    game->mlx = NULL;
-    game->win = NULL;
-    game->img = NULL;
     game->tex.no = NULL;
     game->tex.so = NULL;
     game->tex.we = NULL;
@@ -34,6 +15,19 @@ void init_game(t_game *game)
     game->map.grid = NULL;
     game->map.width = -1;
     game->map.height = -1;
+    game->player.x = -1;
+    game->player.y = -1;
+    game->player.dir_x = -1;
+    game->player.dir_y = -1;
+    game->player.direction = '\0';
+}
+
+void init_game(t_game *game)
+{
+    game->mlx = NULL;
+    game->win = NULL;
+    game->img = NULL;
+    init_parse(game);
 }
 
 int main (int argc, char* argv[])
@@ -49,15 +43,22 @@ int main (int argc, char* argv[])
     init_game(&game);
     parse(argv[1],&game);
 
+
+    //printf test
+    //textureが入ってるか
     printf("%s\n", game.tex.no);
     printf("%s\n", game.tex.so);
     printf("%s\n", game.tex.we);
     printf("%s\n", game.tex.ea);
+    //floor color
     printf("%d,%d,%d\n", game.floor.r, game.floor.g, game.floor.b);
+    //ceiling color
     printf("%d,%d,%d\n", game.ceiling.r, game.ceiling.g, game.ceiling.b);
+    //map grid
     int i = 0; 
     while(i < game.map.height)
     {
         printf("%s", game.map.grid[i++]);
     }
+    printf("\n %f,%f,%f,%f,%c\n", game.player.x, game.player.y, game.player.dir_x, game.player.dir_y, game.player.direction);
 }

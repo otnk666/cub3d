@@ -4,6 +4,7 @@
 int parse_texture(char *line, t_game *game)
 {
     char **split;
+    char *newline;
 
     split = ft_split(line,' ');
     if(!split || !split[0] || !split[1])
@@ -11,13 +12,15 @@ int parse_texture(char *line, t_game *game)
         free_split(split);
         return(0);
     }
-
+    newline = ft_strchr(split[1], '\n');
+    if (newline)
+        *newline = '\0';
     if (!ft_strncmp("NO",split[0],2) && !game->tex.no)
         game->tex.no = ft_strdup(split[1]);
     else if (!ft_strncmp("SO",split[0],2) && !game->tex.so)
         game->tex.so = ft_strdup(split[1]);
     else if (!ft_strncmp("WE",split[0],2) && !game->tex.we)
-        game->tex.we = ft_strdup(split[1]);       
+        game->tex.we = ft_strdup(split[1]);
     else if (!ft_strncmp("EA",split[0],2) && !game->tex.ea)
         game->tex.ea = ft_strdup(split[1]);
     else
@@ -26,7 +29,7 @@ int parse_texture(char *line, t_game *game)
         return (0);
     }
     free_split(split);
-    return(1);            
+    return(1);
 }
 
 int parse_color(char *line, t_game *game)
@@ -114,19 +117,20 @@ int parse_elem(int fd, t_game *game)
 void parse(char *filename, t_game *game)
 {
     int fd;
-    
     fd = open(filename, O_RDONLY);
     if (fd < 0)
     {
         return; //need Error msg;
     }
-
     if (!parse_elem(fd, game))
     {
         return; //Error msg;
     }
-
     if (!parse_map(fd, game))
+    {
+        return;
+    }
+    if (!find_player(game))
     {
         return;
     }
