@@ -769,24 +769,6 @@ make fclean
 
 ---
 
-## Timeline Estimate
-
-| Phase | Duration | Tasks |
-|-------|----------|-------|
-| 1 | 3-4 days | Parsing & validation |
-| 2 | 2-3 days | MLX setup & textures |
-| 3 | 1-2 days | Player initialization |
-| 4 | 4-5 days | Raycasting algorithm |
-| 5 | 2-3 days | Texture mapping |
-| 6 | 1 day | Floor & ceiling |
-| 7 | 2-3 days | Movement & rotation |
-| 8 | 2-3 days | Polish & debugging |
-| 9 | 3-5 days | Bonus (optional) |
-
-**Total:** 3-4 weeks for mandatory, +1 week for bonus
-
----
-
 ## Getting Started
 
 ### Immediate Next Steps:
